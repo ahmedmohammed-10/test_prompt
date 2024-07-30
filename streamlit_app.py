@@ -1,6 +1,6 @@
 import streamlit as st
 from controller.ask_controller import ask
-
+from controller.search_controller import search
 
 st.title("Chat With DMS")
 
@@ -32,8 +32,13 @@ system = st.text_area("System:", "", height=200, key="system")
 
 # Create a button for sending the messages
 if st.button("Send"):
-    if user and system and cohere_key:
-        response = ask(user, system, cohere_key)
-        st.write(f"Response: {response}")
+    if user:
+        context = search(user)
+        if context:
+            st.write(context)
+            response = ask(user, system, cohere_key)
+            st.write(response)
+        else:
+            st.write("Please enter both Cohere Key and System.")
     else:
         st.write("Please enter both messages.")
