@@ -4,7 +4,7 @@ import requests
 
 def search(query):
     filter_type = ["api", "document"]
-    url = "http{server}/similarity_search"
+    url = "http://172.105.247.6:8050/similarity_search"
     payload = json.dumps({
         "query": query,
         "filter_type": filter_type
